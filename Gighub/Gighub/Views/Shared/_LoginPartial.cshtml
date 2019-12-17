@@ -11,8 +11,9 @@
 				@User.Identity.GetUserName()
 			</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="@Url.Action("Attending","Gigs")">Gigs I'm going</a></li>
-				<li><a class="dropdown-item" href="@Url.Action("Index","Followees")">Artists I'm following</a></li>
+				<li><a class="dropdown-item" href="@Url.Action("Mine","Gigs")">My Upcoming Gigs</a></li>
+				<li><a class="dropdown-item" href="@Url.Action("Attending","Gigs")">Gigs I'm Going</a></li>
+				<li><a class="dropdown-item" href="@Url.Action("Index","Followees")">Artists I'm Following</a></li>
 				<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
 			</ul>
 		</li>
