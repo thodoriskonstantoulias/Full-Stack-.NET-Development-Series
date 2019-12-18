@@ -185,6 +185,9 @@
     <Compile Include="Migrations\201912181943200_AddIsCancelledToGigTable.Designer.cs">
       <DependentUpon>201912181943200_AddIsCancelledToGigTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="ViewModels\GigViewModel.cs" />
     <Compile Include="Dtos\AttendanceDto.cs" />
     <Compile Include="Controllers\Api\AttendancesController.cs" />
