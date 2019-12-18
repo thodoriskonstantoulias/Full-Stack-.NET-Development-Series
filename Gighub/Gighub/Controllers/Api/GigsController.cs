@@ -18,11 +18,14 @@ namespace Gighub.Controllers.Api
             _context = new ApplicationDbContext();
         }
         
-        [HttpDelete]
+        [HttpDelete] 
         public IHttpActionResult Cancel(int id)
         {
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs.Single(g => g.Id == id && g.ArtistId == userId);
+
+            if (gig.IsCancelled) return NotFound();
+
             gig.IsCancelled = true;
 
             _context.SaveChanges();

@@ -20,7 +20,10 @@ namespace Gighub.Controllers
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Gigs.Where(g => g.ArtistId == userId && g.DateTime > DateTime.Now).Include(g => g.Genre).ToList();
+            var gigs = _context.Gigs.Where(g => g.ArtistId == userId      && 
+                                                g.DateTime > DateTime.Now && 
+                                                !g.IsCancelled)
+                                                .Include(g => g.Genre).ToList();
             
             return View(gigs);
         }
@@ -29,7 +32,11 @@ namespace Gighub.Controllers
         public ActionResult Attending()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Attendances.Where(a => a.AttendeeId == userId).Select(a => a.Gig).Include(g => g.Artist).Include(g => g.Genre).ToList();
+            var gigs = _context.Attendances.Where(a => a.AttendeeId == userId)
+                                           .Select(a => a.Gig)
+                                           .Include(g => g.Artist)
+                                           .Include(g => g.Genre)
+                                           .ToList();
 
             var viewModel = new GigViewModel
             {
