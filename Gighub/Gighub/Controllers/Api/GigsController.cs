@@ -28,6 +28,26 @@ namespace Gighub.Controllers.Api
 
             gig.IsCancelled = true;
 
+            var notification = new Notification
+            {
+                DateTime = DateTime.Now,
+                Type = NotificationType.GigCancelled,
+                Gig = gig,
+
+            };
+
+            //We find all users that attend this gig, to send them the notification
+            var attendees = _context.Attendances.Where(g => g.GigId == gig.Id).Select(a =>a.Attendee).ToList();
+            foreach (var attendee in attendees)
+            {
+                var userNotification = new UserNotification
+                {
+                    User = attendee,
+                    Notification = notification
+                };
+                _context.UserNotifications.Add(userNotification);
+            }
+
             _context.SaveChanges();
             return Ok();
         }

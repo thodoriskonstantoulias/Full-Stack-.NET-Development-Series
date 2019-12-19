@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201912181943200_AddIsCancelledToGigTable.Designer.cs">
       <DependentUpon>201912181943200_AddIsCancelledToGigTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912191716441_AddNotification.cs" />
+    <Compile Include="Migrations\201912191716441_AddNotification.Designer.cs">
+      <DependentUpon>201912191716441_AddNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\UserNotification.cs" />
@@ -349,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912181943200_AddIsCancelledToGigTable.resx">
       <DependentUpon>201912181943200_AddIsCancelledToGigTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912191716441_AddNotification.resx">
+      <DependentUpon>201912191716441_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
