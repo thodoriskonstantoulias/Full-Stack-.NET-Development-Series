@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data.Entity;
 using Gighub.Dtos;
+using AutoMapper;
 
 namespace Gighub.Controllers.Api
 {
@@ -29,25 +30,33 @@ namespace Gighub.Controllers.Api
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
-            return notifications.Select(n => new NotificationDto()
-            { 
-                DateTime = n.DateTime,
-                Gig = new GigDto 
-                {
-                    Artist = new UserDto 
-                    {
-                        Id = n.Gig.Artist.Id,
-                        Name = n.Gig.Artist.Name
-                    },
-                    DateTime = n.Gig.DateTime,
-                    Id = n.Gig.Id,
-                    IsCancelled = n.Gig.IsCancelled,
-                    Venue = n.Gig.Venue
-                },
-                OriginalDateTime = n.OriginalDateTime,
-                OriginalVenue = n.OriginalVenue,
-                Type = n.Type
-            });
+            //Using auto mapper for mapping the domain model fields with the DTOs
+            Mapper.CreateMap<ApplicationUser, UserDto>();
+            Mapper.CreateMap<Gig, GigDto>();
+            Mapper.CreateMap<Notification, NotificationDto>();
+
+            //return notifications.Select(n => new NotificationDto()
+            //{ 
+            //    DateTime = n.DateTime,
+            //    Gig = new GigDto 
+            //    {
+            //        Artist = new UserDto 
+            //        {
+            //            Id = n.Gig.Artist.Id,
+            //            Name = n.Gig.Artist.Name
+            //        },
+            //        DateTime = n.Gig.DateTime,
+            //        Id = n.Gig.Id,
+            //        IsCancelled = n.Gig.IsCancelled,
+            //        Venue = n.Gig.Venue
+            //    },
+            //    OriginalDateTime = n.OriginalDateTime,
+            //    OriginalVenue = n.OriginalVenue,
+            //    Type = n.Type
+            //});
+
+            //much cleaner with auto mapper
+            return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
     }
 }
