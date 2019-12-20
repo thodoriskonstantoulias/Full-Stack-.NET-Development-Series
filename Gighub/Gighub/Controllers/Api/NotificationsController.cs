@@ -30,11 +30,6 @@ namespace Gighub.Controllers.Api
                 .Include(n => n.Gig.Artist)
                 .ToList();
 
-            //Using auto mapper for mapping the domain model fields with the DTOs
-            Mapper.CreateMap<ApplicationUser, UserDto>();
-            Mapper.CreateMap<Gig, GigDto>();
-            Mapper.CreateMap<Notification, NotificationDto>();
-
             //return notifications.Select(n => new NotificationDto()
             //{ 
             //    DateTime = n.DateTime,
@@ -55,6 +50,8 @@ namespace Gighub.Controllers.Api
             //    Type = n.Type
             //});
 
+            //Using auto mapper for mapping the domain model fields with the DTOs- in application start we do the mapping
+            
             //much cleaner with auto mapper
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
