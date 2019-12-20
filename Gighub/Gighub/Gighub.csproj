@@ -179,8 +179,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\GigsController.cs" />
+    <Compile Include="Controllers\Api\NotificationsController.cs" />
     <Compile Include="Controllers\FolloweesController.cs" />
     <Compile Include="Controllers\Api\FollowingsController.cs" />
+    <Compile Include="Dtos\GenreDto.cs" />
+    <Compile Include="Dtos\GigDto.cs" />
+    <Compile Include="Dtos\NotificationDto.cs" />
+    <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Migrations\201912181943200_AddIsCancelledToGigTable.cs" />
     <Compile Include="Migrations\201912181943200_AddIsCancelledToGigTable.Designer.cs">
       <DependentUpon>201912181943200_AddIsCancelledToGigTable.cs</DependentUpon>
