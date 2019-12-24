@@ -1,8 +1,17 @@
 ﻿@model Gighub.ViewModels.GigViewModel
 @{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
+@using (Html.BeginForm("Search", "Gigs"))
+{
+	<div class="form-group">
+		<div id="searchGigs" class="input-group">
+			@Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+			<spam class="input-group-addon"><i class="glyphicon glyphicon-search"></i></spam>
+		</div>		
+	</div>
+}
 <ul class="gigs voffset4">
 	@foreach (var gig in Model.UpcomingGigs)
 	{
@@ -26,13 +35,13 @@
 					}
 				</span>
 				<span class="genre">@gig.Genre.Name</span>
-				@if (Model.ShowActions && !gig.IsCancelled) 
+				@if (Model.ShowActions && !gig.IsCancelled)
 				{
 					<button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going ?</button>
 				}					
 			</div>
 		</li>
-	}
+		}
 </ul>
 
 @section scripts{

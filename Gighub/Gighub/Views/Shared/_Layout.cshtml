@@ -81,8 +81,14 @@
 						return compiled({ notifications : notifications });
 					},
 					placement: "bottom"
+				}).on("shown.bs.popover", function () {
+					$.post("/api/notifications/markAsRead")
+						.done(function () {
+							$(".js-notifications-count").text("").addClass("hide");
+						});
 				});
-			});			
+			});	
+
 		});
 	</script>
 </body>
