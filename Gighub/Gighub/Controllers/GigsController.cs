@@ -1,7 +1,9 @@
 ﻿using Gighub.Models;
+using Gighub.Repositories;
 using Gighub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -11,9 +13,14 @@ namespace Gighub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly AttendanceRepository attendanceRepository;
+        private readonly GigRepository gigRepository;
+
         public GigsController()
         {
             _context = new ApplicationDbContext();
+            attendanceRepository = new AttendanceRepository(_context);
+            gigRepository = new GigRepository(_context);
         }
 
         [Authorize]
@@ -32,14 +39,9 @@ namespace Gighub.Controllers
         public ActionResult Attending()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Attendances.Where(a => a.AttendeeId == userId)
-                                           .Select(a => a.Gig)
-                                           .Include(g => g.Artist)
-                                           .Include(g => g.Genre)
-                                           .ToList();
+            var gigs = gigRepository.GetGigsUserAttending(userId);
 
-            var attendances = _context.Attendances.Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now).ToList()
-                                                  .ToLookup(a => a.GigId);
+            var attendances = attendanceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId);
 
             var viewModel = new GigViewModel
             {
@@ -51,6 +53,10 @@ namespace Gighub.Controllers
 
             return View("Gigs", viewModel);
         }
+
+        
+
+        
 
         [Authorize]
         public ActionResult Create()
