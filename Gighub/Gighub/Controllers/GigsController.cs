@@ -20,11 +20,11 @@ namespace Gighub.Controllers
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Gigs.Where(g => g.ArtistId == userId      && 
-                                                g.DateTime > DateTime.Now && 
+            var gigs = _context.Gigs.Where(g => g.ArtistId == userId &&
+                                                g.DateTime > DateTime.Now &&
                                                 !g.IsCancelled)
                                                 .Include(g => g.Genre).ToList();
-            
+
             return View(gigs);
         }
 
@@ -47,7 +47,7 @@ namespace Gighub.Controllers
 
             return View("Gigs", viewModel);
         }
-        
+
         [Authorize]
         public ActionResult Create()
         {
@@ -57,7 +57,7 @@ namespace Gighub.Controllers
                 Heading = "Add a Gig"
             };
 
-            return View("GigForm" , viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
@@ -77,7 +77,7 @@ namespace Gighub.Controllers
                 Heading = "Edit a Gig"
             };
 
-            return View("GigForm" , viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
@@ -85,7 +85,7 @@ namespace Gighub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel viewModel)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 viewModel.Genres = _context.Genres.ToList();
                 return View("GigForm", viewModel);
@@ -102,7 +102,7 @@ namespace Gighub.Controllers
             _context.Gigs.Add(gig);
             _context.SaveChanges();
 
-            return RedirectToAction("Mine", "Gigs"); 
+            return RedirectToAction("Mine", "Gigs");
         }
 
         [Authorize]
@@ -125,6 +125,12 @@ namespace Gighub.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Gigs");
+        }
+
+        [HttpPost]
+        public ActionResult Search(GigViewModel viewModel)
+        {
+            return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
     }
 }
