@@ -43,5 +43,10 @@ namespace Gighub.Repositories
                                                 !g.IsCancelled)
                                                 .Include(g => g.Genre).ToList();
         }
+
+        public void Add(Gig gig)
+        {
+            _context.Gigs.Add(gig);
+        }
     }
 }
