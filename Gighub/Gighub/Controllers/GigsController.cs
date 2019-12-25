@@ -27,9 +27,7 @@ namespace Gighub.Controllers
             var gigs = unitOfWork.Gigs.GetUpcomingGigsByArtist(userId);
 
             return View(gigs);
-        }
-
-        
+        }       
 
         [Authorize]
         public ActionResult Attending()
