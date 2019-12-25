@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Gighub.Repositories
 {
-    public class FollowingRepository
+    public class FollowingRepository : IFollowingRepository
     {
         private readonly ApplicationDbContext _context;
         public FollowingRepository(ApplicationDbContext context)
