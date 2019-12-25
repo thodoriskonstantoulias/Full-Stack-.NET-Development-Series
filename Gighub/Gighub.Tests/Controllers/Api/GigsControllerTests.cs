@@ -18,7 +18,9 @@ namespace Gighub.Tests.Controllers.Api
     {
         private GigsController controller;
         private Mock<IGigRepository> mockRepository;
-        public GigsControllerTests()
+
+        [TestInitialize]
+        public void TestInitialize()
         {
             mockRepository = new Mock<IGigRepository>();
             var mockUoW = new Mock<IUnitOfWork>();
@@ -32,7 +34,7 @@ namespace Gighub.Tests.Controllers.Api
         {
             var result = controller.Cancel(1);
 
-            result.Should().BeOfType<NotFoundResult>();
+            result.Should().BeOfType<NotFoundResult>(); 
         }
 
         [TestMethod]
