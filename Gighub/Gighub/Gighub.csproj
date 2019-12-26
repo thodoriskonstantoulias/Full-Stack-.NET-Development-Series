@@ -209,6 +209,7 @@
     <Compile Include="Core\Dtos\GigDto.cs" />
     <Compile Include="Core\Dtos\NotificationDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201912181943200_AddIsCancelledToGigTable.cs" />
     <Compile Include="Persistence\Migrations\201912181943200_AddIsCancelledToGigTable.Designer.cs">
       <DependentUpon>201912181943200_AddIsCancelledToGigTable.cs</DependentUpon>
